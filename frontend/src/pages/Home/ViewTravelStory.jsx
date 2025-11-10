@@ -1,8 +1,11 @@
-import React from "react"
+import React, { useState } from "react"
 import { IoMdClose } from "react-icons/io"
 import { MdOutlineDelete, MdOutlineUpdate } from "react-icons/md"
 import moment from "moment"
 import { FaLocationDot } from "react-icons/fa6"
+import LikeButton from "../../components/LikeButton"
+import CommentSection from "../../components/CommentSection"
+import { useSelector } from "react-redux"
 
 const ViewTravelStory = ({
   storyInfo,
@@ -10,6 +13,18 @@ const ViewTravelStory = ({
   onEditClick,
   onDeleteClick,
 }) => {
+  const { currentUser } = useSelector((state) => state.user)
+  const [likes, setLikes] = useState(storyInfo?.likes || [])
+  const [comments, setComments] = useState(storyInfo?.comments || [])
+
+  const handleLikeUpdate = (updatedLikes) => {
+    setLikes(updatedLikes)
+  }
+
+  const handleCommentUpdate = (updatedComments) => {
+    setComments(updatedComments)
+  }
+
   return (
     <div className="relative">
       <div className="flex items-center justify-end">
@@ -64,6 +79,24 @@ const ViewTravelStory = ({
           <p className="text-sm text-slate-950 leading-6 text-justify whitespace-pre-line">
             {storyInfo.story}
           </p>
+        </div>
+
+        {/* Like and Comment Section */}
+        <div className="mt-6 border-t pt-4">
+          <div className="flex items-center gap-4 mb-4">
+            <LikeButton
+              storyId={storyInfo?._id}
+              initialLikes={likes}
+              userId={currentUser?._id}
+              onLikeUpdate={handleLikeUpdate}
+            />
+          </div>
+
+          <CommentSection
+            storyId={storyInfo?._id}
+            comments={comments}
+            onCommentUpdate={handleCommentUpdate}
+          />
         </div>
       </div>
     </div>

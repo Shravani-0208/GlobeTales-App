@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import Navbar from "../../components/Navbar"
 import axiosInstance from "../../utils/axiosInstance"
 import TravelStoryCard from "../../components/TravelStoryCard"
@@ -9,15 +10,14 @@ import Modal from "react-modal"
 import AddEditTravelStory from "../../components/AddEditTravelStory"
 import ViewTravelStory from "./ViewTravelStory"
 import EmptyCard from "../../components/EmptyCard"
-import { DayPicker } from "react-day-picker"
 import moment from "moment"
-import FilterInfoTitle from "../../components/FilterInfoTitle"
 import { getEmptyCardMessage } from "../../utils/helper"
 import LikeButton from "../../components/LikeButton"
 import CommentSection from "../../components/CommentSection"
 import MapView from "../../components/MapView"
 
 const Home = () => {
+  const navigate = useNavigate()
   const [allStories, setAllStories] = useState([])
   const [publicStories, setPublicStories] = useState([])
   const [viewMode, setViewMode] = useState("my") // "my" or "public"
@@ -25,7 +25,7 @@ const Home = () => {
   const [searchQuery, setSearchQuery] = useState("")
   const [filterType, setFilterType] = useState("")
 
-  const [dateRange, setDateRange] = useState({ from: null, to: null })
+
 
   // console.log(allStories)
 
@@ -140,38 +140,7 @@ const Home = () => {
     getAllTravelStories()
   }
 
-  // Handle filter travel story by date range
-  const filterStoriesByDate = async (day) => {
-    try {
-      const startDate = day.from ? moment(day.from).valueOf() : null
-      const endDate = day.to ? moment(day.to).valueOf() : null
 
-      if (startDate && endDate) {
-        const response = await axiosInstance.get("/travel-story/filter", {
-          params: { startDate, endDate },
-        })
-
-        if (response.data && response.data.stories) {
-          setFilterType("date")
-          setAllStories(response.data.stories)
-        }
-      }
-    } catch (error) {
-      console.log("Something went wrong. Please try again.")
-    }
-  }
-
-  // Handle date range click
-  const handleDayClick = (day) => {
-    setDateRange(day)
-    filterStoriesByDate(day)
-  }
-
-  const resetFilter = () => {
-    setDateRange({ from: null, to: null })
-    setFilterType("")
-    getAllTravelStories()
-  }
 
   useEffect(() => {
     getAllTravelStories()
@@ -187,9 +156,11 @@ const Home = () => {
         setSearchQuery={setSearchQuery}
         onSearchNote={onSearchStory}
         handleClearSearch={handleClearSearch}
+        showSearch={false}
       />
 
-      <div className="container mx-auto py-10">
+      <div className="min-h-screen bg-gray-50">
+        <div className="container mx-auto py-10">
         {/* View Mode Toggle */}
         <div className="flex justify-center mb-6">
           <div className="bg-white rounded-lg p-1 shadow-md">
@@ -218,16 +189,10 @@ const Home = () => {
 
         {viewMode === "my" ? (
           <>
-            <FilterInfoTitle
-              filterType={filterType}
-              filterDate={dateRange}
-              onClear={() => {
-                resetFilter()
-              }}
-            />
 
-            <div className="flex gap-7">
-              <div className="flex-1">
+
+            <div className="flex justify-center">
+              <div className="flex-1 max-w-4xl">
                 {allStories.length > 0 ? (
                   <div className="grid grid-cols-2 gap-4">
                     {allStories.map((item) => {
@@ -263,20 +228,6 @@ const Home = () => {
                   />
                 )}
               </div>
-
-              <div className="w-[320px]">
-                <div className="bg-white border border-slate-200 shadow-lg shadow-slate-200/60 rounded-lg">
-                  <div className="p-3">
-                    <DayPicker
-                      captionLayout="dropdown"
-                      mode="range"
-                      selected={dateRange}
-                      onSelect={handleDayClick}
-                      pagedNavigation
-                    />
-                  </div>
-                </div>
-              </div>
             </div>
           </>
         ) : (
@@ -308,7 +259,7 @@ const Home = () => {
                         {story.story?.substring(0, 100)}...
                       </p>
                       <button
-                        onClick={() => handleViewStory(story)}
+                        onClick={() => navigate(`/user/${user?._id}`)}
                         className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 transition-colors text-sm"
                       >
                         View Profile
@@ -395,6 +346,7 @@ const Home = () => {
             )}
           </div>
         )}
+        </div>
       </div>
 
       {/* Add & Edit Travel Story Modal */}

@@ -58,7 +58,8 @@ const Map = () => {
         handleClearSearch={handleClearSearch}
       />
 
-      <div className="container mx-auto py-10">
+      <div className="min-h-screen bg-gray-100">
+        <div className="container mx-auto py-10">
         <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Travel Map</h2>
         <p className="text-gray-600 text-center mb-8">
           Explore travel destinations from stories shared by our community
@@ -110,6 +111,7 @@ const Map = () => {
               No stories available yet. Be the first to share your travel experiences!
             </p>
           )}
+        </div>
         </div>
       </div>
     </>

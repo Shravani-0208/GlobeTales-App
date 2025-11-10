@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { IoMdAdd, IoMdClose } from "react-icons/io"
 import { MdOutlineDeleteOutline, MdOutlineUpdate } from "react-icons/md"
-import DateSelector from "./DateSelector"
 import ImageSelector from "./ImageSelector"
 import TagInput from "./TagInput"
 import axiosInstance from "../utils/axiosInstance"
@@ -15,7 +14,7 @@ const AddEditTravelStory = ({
   onClose,
   getAllTravelStories,
 }) => {
-  const [visitedDate, setVisitedDate] = useState(storyInfo?.visitedDate || null)
+  const [visitedDate, setVisitedDate] = useState(storyInfo?.visitedDate || moment().toDate())
   const [title, setTitle] = useState(storyInfo?.title || "")
   const [storyImg, setStoryImg] = useState(storyInfo?.imageUrl || null)
   const [story, setStory] = useState(storyInfo?.story || "")
@@ -218,9 +217,7 @@ const AddEditTravelStory = ({
             onChange={(e) => setTitle(e.target.value)}
           />
 
-          <div className="my-3">
-            <DateSelector date={visitedDate} setDate={setVisitedDate} />
-          </div>
+
 
           <ImageSelector
             image={storyImg}

@@ -9,9 +9,10 @@ import authRoutes from "./routes/auth.route.js"
 import userRoutes from "./routes/user.route.js"
 import travelStoryRoutes from "./routes/travelStory.route.js"
 import bucketListRoutes from "./routes/bucketList.route.js"
+import messageRoutes from "./routes/message.route.js"
 import { fileURLToPath } from "url"
 
-dotenv.config({ encoding: 'utf16le' })
+dotenv.config()
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -46,6 +47,7 @@ app.use("/api/auth", authRoutes)
 app.use("/api/user", userRoutes)
 app.use("/api/travel-story", travelStoryRoutes)
 app.use("/api/bucket-list", bucketListRoutes)
+app.use("/api/messages", messageRoutes)
 
 // server static files from the uploads and assets directory
 const __filename = fileURLToPath(import.meta.url)

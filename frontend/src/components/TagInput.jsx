@@ -59,6 +59,7 @@ const TagInput = ({ tags, setTags }) => {
         />
 
         <button
+          type="button"
           className="w-8 h-8 flex items-center justify-center rounded-sm border border-cyan-500 hover:bg-cyan-500"
           onClick={addNewTag}
         >

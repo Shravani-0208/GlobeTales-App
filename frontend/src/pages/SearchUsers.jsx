@@ -64,7 +64,8 @@ const SearchUsers = () => {
         handleClearSearch={handleClearSearch}
       />
 
-      <div className="container mx-auto py-8 px-4">
+      <div className="min-h-screen bg-gray-100">
+        <div className="container mx-auto py-8 px-4">
         <div className="max-w-2xl mx-auto">
           {/* Search Header */}
           <div className="mb-8">
@@ -171,6 +172,7 @@ const SearchUsers = () => {
               </div>
             )}
           </div>
+        </div>
         </div>
       </div>
     </>

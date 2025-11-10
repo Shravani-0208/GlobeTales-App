@@ -68,68 +68,76 @@ const SignUp = () => {
   }, [currentUser])
 
   return (
-    <div className="min-h-screen relative">
-      <div className="absolute inset-0 bg-cover bg-center bg-no-repeat filter blur-sm" style={{backgroundImage: "url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80')"}}></div>
-      <div className="min-h-screen bg-black bg-opacity-50 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="max-w-md w-full space-y-8">
-          <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-xl shadow-2xl p-8">
-            <div className="text-center">
-              <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
-                Create your account
-              </h2>
-              <p className="mt-2 text-sm text-gray-600">
-                Or{" "}
-                <button
-                  onClick={() => navigate("/login")}
-                  className="font-medium text-indigo-600 hover:text-indigo-500 transition duration-150 ease-in-out"
-                >
-                  sign in to existing account
-                </button>
-              </p>
-            </div>
-            <form className="mt-8 space-y-6" onSubmit={handleSignUp}>
-              <div className="rounded-md shadow-sm -space-y-px">
-                <div>
-                  <label htmlFor="name" className="sr-only">
-                    Full Name
-                  </label>
+    <div className="min-h-screen relative bg-slate-100">
+      <div className="absolute inset-0 bg-gradient-to-br from-cyan-200 via-blue-200 to-purple-200"></div>
+      <div className="absolute inset-0 bg-white bg-opacity-10 backdrop-blur-sm"></div>
+      <div className="relative z-10 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div className="sm:mx-auto sm:w-full sm:max-w-md">
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Create your account
+          </h2>
+          <p className="mt-2 text-center text-sm text-gray-600">
+            Or{" "}
+            <button
+              onClick={() => navigate("/login")}
+              className="font-medium text-indigo-600 hover:text-indigo-500 transition duration-150 ease-in-out"
+            >
+              sign in to existing account
+            </button>
+          </p>
+        </div>
+
+        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+            <form className="space-y-6" onSubmit={handleSignUp}>
+              <div>
+                <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+                  Full Name
+                </label>
+                <div className="mt-1">
                   <input
                     id="name"
                     name="name"
                     type="text"
                     autoComplete="name"
                     required
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Full Name"
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    placeholder="Enter your full name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                   />
                 </div>
-                <div>
-                  <label htmlFor="email" className="sr-only">
-                    Email address
-                  </label>
+              </div>
+
+              <div>
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                  Email address
+                </label>
+                <div className="mt-1">
                   <input
                     id="email"
                     name="email"
                     type="email"
                     autoComplete="email"
                     required
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Email address"
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    placeholder="Enter your email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
-                <div>
-                  <label htmlFor="password" className="sr-only">
-                    Password
-                  </label>
+              </div>
+
+              <div>
+                <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                  Password
+                </label>
+                <div className="mt-1">
                   <PasswordInput
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                    placeholder="Password"
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    placeholder="Enter your password"
                   />
                 </div>
               </div>

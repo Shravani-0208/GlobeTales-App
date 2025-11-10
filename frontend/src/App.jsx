@@ -4,10 +4,13 @@ import Home from "./pages/Home/Home"
 import Login from "./pages/Auth/Login"
 import SignUp from "./pages/Auth/SignUp"
 import Welcome from "./pages/Welcome"
+import About from "./pages/About"
 import BucketList from "./pages/BucketList"
 import Map from "./pages/Map"
 import UserProfile from "./pages/UserProfile"
 import SearchUsers from "./pages/SearchUsers"
+import EditProfile from "./pages/EditProfile"
+import Messages from "./pages/Messages"
 import PrivateRoute from "./components/PrivateRoute"
 
 const App = () => {
@@ -16,6 +19,7 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="/" exact element={<Welcome />} />
+          <Route path="/about" exact element={<About />} />
 
           <Route element={<PrivateRoute />}>
             <Route path="/home" exact element={<Home />} />
@@ -23,6 +27,8 @@ const App = () => {
             <Route path="/map" exact element={<Map />} />
             <Route path="/search-users" exact element={<SearchUsers />} />
             <Route path="/user/:userId" exact element={<UserProfile />} />
+            <Route path="/edit-profile" exact element={<EditProfile />} />
+            <Route path="/messages/:userId?" exact element={<Messages />} />
           </Route>
 
           <Route path="/login" exact element={<Login />} />
